@@ -21,7 +21,7 @@ namespace API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseConfiguration(new ConfigurationBuilder()
-                    .AddJsonFile("/var/www/API/appsettings.json")
+                    .AddJsonFile("/home/ubuntu/back-end/appsettings.json")
                     .Build())
                 .UseStartup<Startup>();
     }
