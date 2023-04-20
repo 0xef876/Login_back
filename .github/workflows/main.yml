@@ -34,7 +34,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-  CI/CD:
+  CI_CD:
     runs-on: ubuntu-latest
     
     needs: build 
