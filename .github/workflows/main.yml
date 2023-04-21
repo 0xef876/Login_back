@@ -1,28 +1,24 @@
-# This is a basic workflow to help you get started with Actions
 
 name: build/CI/CD
 
-# Controls when the workflow will run
 on:
-  # 지정한 branch에서 push/pull_request 에 해당하는 command가 수행되면 이 workflow가 동작 합니다. 
-  # 여기서는 간단히 main 브런치에서 push되면서 이 workflow가 실행 되도록 하겠습니다.
+  # main 브런치가 push 했을때
   push:
     branches: [ main ] 
- 
-  # 이부분은 위의 trigger가 없어도 수동으로 동작 할 수 있게끔 해주는 역할을 합니다.
+  # 이부분은 위의 trigger가 없어도 수동으로 동작 할 수 있게끔 해주는 역할
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 해야 될 일 정의
 jobs:
-  # This workflow contains a single job called "build" 
+  # job 이름 정의
   build:
     runs-on: ubuntu-latest
     
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout
       uses: actions/checkout@v2
-
+    
+    # .NET 버전 설정
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -34,6 +30,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+  
+  # job 이름 정의
   CI_CD:
     runs-on: ubuntu-latest
     
@@ -42,11 +40,13 @@ jobs:
     steps:
     - name: checkout release
       uses: actions/checkout@v3
-
+    
+    # Login_back 를 tar로 압축
     - name: archive Login_back
       run: |
         tar cvfz Login_back.tar.gz *
     
+    # AWS 인증 
     - name: AWS configure credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -54,12 +54,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.SECRET_KEY }}
         aws-region: ap-northeast-2 
     
+    # AWS S3 버킷에 tar 업로드
     - name: upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./Login_back.tar.gz s3://code-deploy-fins/archive/
-      
+      run: aws s3 cp --region ap-northeast-2 ./Login_back.tar.gz s3://code-deploy-fins/archive/back
+    
+    # AWS CodeDeploy 를 이용하여 tar압축을 풀어서 배포
     - name: deploy with AWS codeDeploy
       run: aws deploy create-deployment
         --application-name S3-code-deploy
         --deployment-config-name CodeDeployDefault.OneAtATime
         --deployment-group-name github-action-test
-        --s3-location bucket=code-deploy-fins,bundleType=tgz,key=archive/Login_back.tar.gz
+        --s3-location bucket=code-deploy-fins,bundleType=tgz,key=archive/back/Login_back.tar.gz
