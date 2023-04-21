@@ -4,7 +4,7 @@ REPO=/home/ubuntu/back-end
 cd $REPO
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
-
+export ASPNETCORE_ENVIRONMENT=Production
 echo "Deploying code..."
 dotnet publish
 nohup dotnet /home/ubuntu/back-end/bin/Debug/netcoreapp2.2/publish/API.dll --urls http://0.0.0.0:8000 > /home/ubuntu/back-end/logs.txt 2>&1 &
