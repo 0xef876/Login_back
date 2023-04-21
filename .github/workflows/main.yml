@@ -56,7 +56,7 @@ jobs:
     
     # AWS S3 버킷에 tar 업로드
     - name: upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./Login_back.tar.gz s3://code-deploy-fins/archive/back
+      run: aws s3 cp --region ap-northeast-2 ./Login_back.tar.gz s3://code-deploy-fins/archive/back/
     
     # AWS CodeDeploy 를 이용하여 tar압축을 풀어서 배포
     - name: deploy with AWS codeDeploy
