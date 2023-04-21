@@ -10,11 +10,11 @@ permissions:
     group: ubuntu
     mode: 755
     
-# hooks:
-#   AfterInstall:
-#     - location: scripts/deploy.sh
-#       timeout: 400
-#       runas: ubuntu
-#       commands:
-#         - chmod +x scripts/deploy.sh
-#         - ./scripts/deploy.sh
+hooks:
+  AfterInstall:
+    - location: scripts/deploy.sh
+      timeout: 400
+      runas: ubuntu
+      commands:
+        - chmod +x scripts/deploy.sh
+        - ./scripts/deploy.sh
