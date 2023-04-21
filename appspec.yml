@@ -3,25 +3,18 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/back-end
+    destination: /home/ubuntu
 permissions:
-  - object: /home/ubuntu/back-end
+  - object: /home/ubuntu
     owner: ubuntu
     group: ubuntu
     mode: 755
-    
+     
 hooks:
   AfterInstall:
-    - location: scripts/
+    - location: scripts/deploy.sh
       timeout: 400
       runas: ubuntu
       commands:
-        - sh deploy.sh   
-# hooks:
-#   AfterInstall:
-#     - location: scripts/deploy.sh
-#       timeout: 400
-#       runas: ubuntu
-#       commands:
-#         - chmod +x scripts/deploy.sh
-#         - sh scripts/deploy.sh
+        - chmod +x scripts/deploy.sh
+        - ./scripts/deploy.sh
