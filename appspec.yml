@@ -12,9 +12,8 @@ permissions:
     
 hooks:
   AfterInstall:
-    - location: scripts/deploy.sh
+    - location: /home/ubuntu/back-end
       timeout: 400
       runas: ubuntu
       commands:
-        - chmod +x scripts/deploy.sh
-        - ./scripts/deploy.sh
+        - scripts/deploy.sh
