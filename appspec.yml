@@ -12,9 +12,16 @@ permissions:
     
 hooks:
   AfterInstall:
-    - location: scripts/deploy.sh
+    - location: scripts/
       timeout: 400
       runas: ubuntu
       commands:
-        - chmod +x scripts/deploy.sh
-        - sh scripts/deploy.sh
+        - sh deploy.sh   
+# hooks:
+#   AfterInstall:
+#     - location: scripts/deploy.sh
+#       timeout: 400
+#       runas: ubuntu
+#       commands:
+#         - chmod +x scripts/deploy.sh
+#         - sh scripts/deploy.sh
