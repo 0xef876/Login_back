@@ -14,7 +14,7 @@ namespace API.Models
             // appsettings.json의 ConnectionStrings의 MyDbContext의 password를 입력받은 password로 바꾼다.
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("/home/ubuntu/back-end/appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("/home/ubuntu/back-end/bin/Debug/netcoreapp2.2/publish/appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
             Console.WriteLine(config.GetConnectionString("MyDbContext"));
             optionsBuilder.UseMySql(config.GetConnectionString("MyDbContext"));

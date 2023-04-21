@@ -21,7 +21,7 @@ namespace API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseConfiguration(new ConfigurationBuilder()
-                    .AddJsonFile("/home/ubuntu/back-end/appsettings.json")
+                    .AddJsonFile("/home/ubuntu/back-end/bin/Debug/netcoreapp2.2/publish/appsettings.json")
                     .Build())
                 .UseStartup<Startup>();
     }
