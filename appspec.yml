@@ -17,4 +17,4 @@ hooks:
       runas: ubuntu
       commands:
         - chmod +x scripts/deploy.sh
-        - ./scripts/deploy.sh
+        - sh scripts/deploy.sh
