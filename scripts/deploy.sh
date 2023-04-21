@@ -1,7 +1,7 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/back-end
+REPO=/home/ubuntu/back-end
 
-cd $REPOSITORY
+cd $REPO
 
 dotnet publish
 
