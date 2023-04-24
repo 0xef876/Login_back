@@ -1,9 +1,10 @@
 #!/bin/bash
-REPO=/home/ubuntu/back-end
+REPO=/var/www/html/back
 
 cd $REPO
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 export ASPNETCORE_ENVIRONMENT=Production
 export PASSWORD=$(cat /etc/password.txt)
-dotnet publish
+dotnet publish -c Release
+sudo systemctl restart apache2

@@ -3,9 +3,9 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/back-end
+    destination: /var/www/html/back
 permissions:
-  - object: /home/ubuntu/back-end
+  - object: /var/www/html/back
     owner: ubuntu
     group: ubuntu
     mode: 755
